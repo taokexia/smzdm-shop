@@ -1,3 +1,17 @@
 
 body[data-v-302f9614]{font-family:Microsoft Yahei
 }
+.vmodal-mask{position:fixed;z-index:9998;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.5);display:table;-webkit-transition:opacity .3s ease;transition:opacity .3s ease
+}
+.vmodal-container{width:550px;max-width:90%;margin:150px auto 0;padding:10px 20px;background-color:#fff;border-radius:2px;-webkit-box-shadow:0 2px 8px rgba(0,0,0,.33);box-shadow:0 2px 8px rgba(0,0,0,.33);-webkit-transition:all .3s ease;transition:all .3s ease
+}
+.vmodal-header{padding:5px 0;overflow:hidden
+}
+.vmodal-header .dismiss{color:#666;font-size:14px;cursor:pointer
+}
+.vmodal-body{padding:10px 50px 50px;color:#666;font-size:16px;line-height:1.8em
+}
+.vmodal-enter,.vmodal-leave-active{opacity:0
+}
+.vmodal-enter .vmodal-container,.vmodal-leave-active .vmodal-container{-webkit-transform:scale(1.1);transform:scale(1.1)
+}

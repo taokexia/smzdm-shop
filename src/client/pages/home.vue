@@ -13,7 +13,7 @@ export default {
         'layout-component': layout,
     },
     head: {
-        title: {
+        title: { //用于VueHead组件
             inner: '首页'
         }
     }
