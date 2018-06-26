@@ -16,7 +16,16 @@ const user = {
     logout: 'logout',
 }
 
+//根据后台接口，定义 category 的 API
+const category = {
+    findAll: 'cates',
+    add: 'cate/add',
+    edit: 'cate/edit',
+    remove: 'cate/delete',
+}
+
 export {
     fetch,
     user,
+    category, //导出 API
 }

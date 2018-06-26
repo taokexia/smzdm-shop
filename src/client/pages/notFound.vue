@@ -11,6 +11,9 @@ export default {
         return {
         }
     },
+    components: {
+        'layout-component': layout
+    },
     head: {
         title: {
             inner: '页面不存在'

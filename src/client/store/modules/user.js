@@ -23,7 +23,7 @@ const actions = {
         let res = await fetch.get(userUrls.getUser)
 
         commit({
-            types: type.SIGN_USER,
+            type: types.SIGN_USER,
             data: res.data
         })
     },

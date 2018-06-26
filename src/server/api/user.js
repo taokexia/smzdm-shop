@@ -26,7 +26,7 @@ export default function (router) {
         if (password !== repassword) {
             ctx.body = { ok: false, msg: '两次密码不一样'};
         } else {
-            let usr = new User({
+            let user = new User({
                 username,
                 email,
                 password,
@@ -36,8 +36,9 @@ export default function (router) {
     })
 
     //获取当前登录用户
-    router.get('/aip/user', async (ctx, next) => {
+    router.get('/api/user', async (ctx, next) => {
         if (ctx.session.user) {
+            console.log(ctx.session.user)
             ctx.body = { ok: true, msg: '已登录', user: ctx.session.user }
         } else {
             ctx.body = { ok: false, msg: '未登录' }

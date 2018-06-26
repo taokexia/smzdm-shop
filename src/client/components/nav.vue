@@ -2,10 +2,12 @@
     <nav>
         <div class="container">
             <router-link to="/" exact>首页</router-link>
+            <!-- 通过 for 循环显示分类 -->
+            <router-link v-if="cates.cates" v-for="cate in cates.cates" :key="cate.url" :to="'/category/' + cate.url">{{ cate.name }}</router-link>
             <div class="pull-right">
-                <template v-if="user && user.of">
+                <template v-if="user && user.ok">
                     <router-link to="/user">{{ user.user.username }}</router-link>
-                    <router-link v-if="user && user.user && user.user.isAdmin" to='/admin/categories'>管理</router-link>
+                    <router-link v-if="user && user.user && user.user.isAdmin" to="/admin/categories">管理</router-link>
                     <a href="#" @click="logout">退出</a>
                 </template>
                 <template v-else>
@@ -72,6 +74,10 @@ export default {
             // 通过 store 中定义的 getters 获取用户信息
             return this.$store.getters.currentUser
         },
+        cates() {
+            // 从 store 的 getters 获取所有分类 添加
+            return this.$store.getters.cates
+        }
     },
     methods: {
         async signin() {
@@ -103,6 +109,10 @@ export default {
             this.$store.dispatch({ type: 'logout' })
         }
     },
+    mounted() {
+        // 组件挂载后通过 store dispatch 请求所有分类 添加
+        this.$store.dispatch({ type: 'getCates' })
+    }
 }
 </script>
 
