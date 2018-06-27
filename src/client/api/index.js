@@ -24,8 +24,15 @@ const category = {
     remove: 'cate/delete',
 }
 
+const tag = {
+    findByPage: (page=1) => 'tags/page/${page}',
+    add: 'tag/add',
+    remove: 'tag/delete',
+}
+
 export {
     fetch,
     user,
     category, //导出 API
+    tag,
 }

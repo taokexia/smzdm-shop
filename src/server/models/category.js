@@ -20,7 +20,7 @@ cateSchema.virtual('prettyCreatedAt').get(function() {
 })
 
 // 添加分类
-cateSchema.static.save = async function(cate) {
+cateSchema.statics.save = async function(cate) {
     // 查找是否存在相同名称的分类
     let document_1 = await this.findOne({ name: cate.name })
     if (document_1) { 

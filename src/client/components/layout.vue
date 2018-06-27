@@ -8,6 +8,7 @@
                     <slot name="body"></slot><!-- slot用于内容分发 -->
                 </div>
                 <div class="col-sm-3">
+                    <tags-component></tags-component>
                     <slot name="side"></slot>
                 </div>
             </div>
@@ -20,12 +21,14 @@
 import header from './header.vue'
 import footer from './footer.vue'
 import nav from './nav.vue'
+import tags from './tags.vue'
 
 export default {
     components: {
         'header-component': header,
         'footer-component': footer,
         'nav-component': nav,
+        'tags-component': tags,
     }
 }
 </script>
