@@ -6,21 +6,45 @@
             </div>
             <div class="col-sm-6 search">
                 <div class="input-group">
-                    <input type="text" class="form-control">
+                    <!-- 修改输入框代码，绑定 search 变量 -->
+                    <input type="text" class="form-control" placeholder="" v-model="search">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
+                        <!-- 修改搜索按钮代码，绑定点击方法 -->
+                        <button class="btn btn-default" type="button" @click="goSearch">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </span>
                 </div>
                 <div class="hot-search">
+                    <!-- 修改热门搜索，直接跳转到搜索结果页 -->
                     <span>热门搜索</span>
-                    <span>零食</span>
+                    <router-link to="/search?search=专享">专享</router-link>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+// 新增 js 代码
+export default {
+    data() {
+        return {
+            search: ''
+        }
+    },
+    methods: {
+        // 跳转到搜索结果页
+        goSearch() {
+            this.$router.push({ path: '/search', query: { search: this.search }})
+        }
+    },
+    mounted() {
+        // 获取搜索关键字
+        this.search = this.$route.query.search
+    }
+}
+</script>
 
 <style scoped>
 .container {

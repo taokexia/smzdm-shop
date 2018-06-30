@@ -1,15 +1,11 @@
 <template>
     <layout-component>
         <div slot="body">
-            <!-- 渲染商品列表 -->
             <list-component :products="products">
-                <div slot="header" class="list-title">
-                    <span>精选</span>
-                </div>
             </list-component>
-            <!-- 渲染分页组件 -->
             <pagination-component
                 v-if="pages > 1"
+                :query="keyword"
                 :total="total"
                 :page="page"
                 :pages="pages"
@@ -22,7 +18,7 @@
 import layout from '../components/layout.vue'
 import list from '../components/list.vue'
 import pagination from '../components/pagination.vue'
-import { fetch, product } from  '../api'
+import { fetch, search } from '../api'
 
 export default {
     components: {
@@ -39,25 +35,34 @@ export default {
         }
     },
     head: {
-        title: { //用于VueHead组件
-            inner: '首页'
+        title: {
+            inner: '搜索'
         }
     },
     computed: {
-        // 获取当前页的页码
+        // 获取搜索关键词
+        keyword() {
+            return this.$route.query.search || ''
+        },
+        // 获取当前页数
         currentPage() {
             return this.$route.params.page || 1
-        }
+        },
     },
     watch: {
+        // 关键字改变是重现获取商品
+        keyword() {
+            this.getProducts()
+        },
+        // 页数改变时重现获取商品
         currentPage() {
             this.getProducts()
         }
     },
     methods: {
-        // 按分页获取商品
+        // 通过关键字搜索商品
         async getProducts() {
-            let res = await fetch.get(product.findByPage(this.currentPage))
+            let res = await fetch.get(search.findByPage(this.keyword, this.currentPage))
             if (res.data.ok) {
                 this.total = res.data.products.total
                 this.page = res.data.products.page
@@ -71,14 +76,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.list-title {
-    margin: 15px;
-    margin-left: 0;
-    padding-left: 15px;
-    color: #333;
-    font-size: 20px;
-    border-left: 2px solid #f04848;
-}
-</style>

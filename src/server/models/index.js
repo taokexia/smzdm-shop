@@ -4,4 +4,6 @@ export { User } from './user'
 export { Category } from './category' 
 // 导出 Tag
 export { Tag } from './tag'
+// 导出 Product
+export { Product } from './product'
 

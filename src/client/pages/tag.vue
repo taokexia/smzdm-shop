@@ -1,13 +1,7 @@
 <template>
     <layout-component>
         <div slot="body">
-            <!-- 渲染商品列表 -->
-            <list-component :products="products">
-                <div slot="header" class="list-title">
-                    <span>精选</span>
-                </div>
-            </list-component>
-            <!-- 渲染分页组件 -->
+            <list-component :products="products"></list-component>
             <pagination-component
                 v-if="pages > 1"
                 :total="total"
@@ -22,7 +16,7 @@
 import layout from '../components/layout.vue'
 import list from '../components/list.vue'
 import pagination from '../components/pagination.vue'
-import { fetch, product } from  '../api'
+import { fetch, product } from '../api'
 
 export default {
     components: {
@@ -39,25 +33,35 @@ export default {
         }
     },
     head: {
-        title: { //用于VueHead组件
-            inner: '首页'
+        title() {
+            return {
+                inner: this.tag
+            }
         }
     },
     computed: {
-        // 获取当前页的页码
+        // 获取当前标签
+        tag() {
+            return this.$route.params.tag
+        },
+        // 获取当前页码
         currentPage() {
             return this.$route.params.page || 1
         }
     },
     watch: {
+        tag() {
+            this.$emit('updateHead')
+            this.getProducts()
+        },
         currentPage() {
             this.getProducts()
         }
     },
     methods: {
-        // 按分页获取商品
+        // 获取商品
         async getProducts() {
-            let res = await fetch.get(product.findByPage(this.currentPage))
+            let res = await fetch.get(product.findByTag(this.tag, this.currentPage))
             if (res.data.ok) {
                 this.total = res.data.products.total
                 this.page = res.data.products.page
@@ -71,14 +75,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.list-title {
-    margin: 15px;
-    margin-left: 0;
-    padding-left: 15px;
-    color: #333;
-    font-size: 20px;
-    border-left: 2px solid #f04848;
-}
-</style>

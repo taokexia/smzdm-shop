@@ -4,6 +4,11 @@ import VueRouter from 'vue-router'
 import store from '../store'
 import admin from './admin'
 
+import category from './category'
+import tag from './tag'
+import product from './product'
+import search from './search'
+
 // 获取组件,webpack会按需加载js代码，提高单页应用性能。
 const home = () => import('../pages/home.vue')
 const notFound = () => import('../pages/notFound.vue')
@@ -20,6 +25,10 @@ const router = new VueRouter({
         },
         // 添加 admin 路由
         ...admin,
+        ...category,
+        ...tag,
+        ...product,
+        ...search,
         {
             path: '*',
             component: notFound

@@ -10,6 +10,7 @@ const fetch = axios.create({
 
 // 对应 Koa 中实现的 API 接口地址
 const user = {
+    findByPage: (page=1) => `users/page/${page}`,
     getUser: 'user',
     signin: 'signin',
     signup: 'signup',
@@ -30,9 +31,28 @@ const tag = {
     remove: 'tag/delete',
 }
 
+const product = {
+    findByPage: (page=1) => `products/page/${page}`,
+    findByCate: (cate, page) => `products/category/${cate}/page/${page}`,
+    findByTag: (tag, page) => `products/tag/${tag}/page/${page}`,
+    findByCollected: (page=1) => `products/collected/page/${page}`,
+    findById: id => `product/${id}`,
+    add: 'product/add',
+    edit: 'product/edit',
+    remove: 'product/delete',
+    follow: 'product/follow',
+    unfollow: 'product/unfollow',
+}
+
+// 添加搜索 API
+const search = {
+    findByPage: (search, page=1) => 'search/${search}/page/${page}'
+}
 export {
     fetch,
     user,
     category, //导出 API
     tag,
+    product,
+    search,
 }
